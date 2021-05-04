@@ -9,3 +9,8 @@
 :host([data-highlight]) {
 	background-color: rgb(var(--smoothly-secondary-tint));
 }
+
+:host div:last-child {
+	color: rgba(var(--smoothly-default-contrast), 0.5);
+	font-style: italic;
+}
