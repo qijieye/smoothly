@@ -16,7 +16,6 @@ export class SmoothlyMenuOptions {
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() order = false
 	@Prop() optionStyle: any
-	/** @Prop options: is only needed if ig-options are inserted via slot */
 	@Prop({ mutable: true, reflect: true }) options: OptionType[] = []
 	@Watch("options")
 	optionsChangeHandler(newOptions: OptionType[]) {
