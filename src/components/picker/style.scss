@@ -58,6 +58,7 @@ ul {
 		color: rgba(var(--selected-item-color));
 		fill: rgba(var(--selected-item-color));
 		font-size: small;
+		white-space: nowrap;
 	}
 	li:last-child {
 		flex-grow: 1;

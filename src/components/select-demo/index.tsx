@@ -55,17 +55,17 @@ export class SmoothlySelectDemo {
 				label="filter"
 				multiple={true}
 				options={[
-					{ name: "Dog", value: "dog", aliases: ["WOFF"] },
-					{ name: "Cat", value: "cat", aliases: ["moew"] },
-					{ name: "Pig", value: "pig" },
+					{ name: "Who Let the Dog", value: "dog", aliases: ["WOFF"] },
+					{ name: "Curious Cat", value: "cat", aliases: ["moew"] },
+					{ name: "Muddy Pig", value: "pig" },
 					{ name: "Turtle", value: "turtle" },
-					{ name: "Spider", value: "spider" },
-					{ name: "Phoenix", value: "phoenix" },
-					{ name: "Horse", value: "horse" },
-					{ name: "Unicorn", value: "unicorn" },
+					{ name: "Spider Man", value: "spider" },
+					{ name: "Burning Phoenix", value: "phoenix" },
+					{ name: "Riding Horse", value: "horse" },
+					{ name: "Magnificant Unicorn", value: "unicorn" },
 					{ name: "Parrot", value: "parrot" },
 					{ name: "Dragon", value: "dragon" },
-					{ name: "Kraken", value: "kraken" },
+					{ name: "Mighty Kraken", value: "kraken" },
 				]}></smoothly-picker>,
 			<br />,
 			<smoothly-picker
@@ -73,17 +73,17 @@ export class SmoothlySelectDemo {
 				multiple={false}
 				max-menu-height="200px"
 				options={[
-					{ name: "Dog", value: "dog", aliases: ["WOFF"], description: "Woof 🐶" },
-					{ name: "Cat", value: "cat", aliases: ["moew"] },
-					{ name: "Pig", value: "pig" },
+					{ name: "Who Let the Dog", value: "dog", aliases: ["WOFF"], description: "Woof 🐶" },
+					{ name: "Curious Cat", value: "cat", aliases: ["moew"] },
+					{ name: "Muddy Pig", value: "pig" },
 					{ name: "Turtle", value: "turtle" },
-					{ name: "Spider", value: "spider" },
-					{ name: "Phoenix", value: "phoenix" },
-					{ name: "Horse", value: "horse" },
-					{ name: "Unicorn", value: "unicorn" },
+					{ name: "Spider Man", value: "spider" },
+					{ name: "Burning Phoenix", value: "phoenix" },
+					{ name: "Riding Horse", value: "horse" },
+					{ name: "Magnificant Unicorn", value: "unicorn" },
 					{ name: "Parrot", value: "parrot" },
 					{ name: "Dragon", value: "dragon" },
-					{ name: "Kraken", value: "kraken" },
+					{ name: "Mighty Kraken", value: "kraken" },
 				]}></smoothly-picker>,
 		]
 	}
