@@ -8,6 +8,7 @@ export class SmoothlyRoom {
 	@Prop() icon?: string
 	@Prop() path: string
 	@Prop() to?: string
+	@Prop() responsive?: true
 	render() {
 		return <slot></slot>
 	}

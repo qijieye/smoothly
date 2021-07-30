@@ -20,6 +20,64 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
 	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
+	function navigationLinks(): HTMLElement[] {
+		return utils
+			.map(
+				[
+					...children.filter(child => child.vattrs?.slot == "nav-start"),
+					...children.filter(child => child.vattrs?.label && child.vattrs?.path),
+					...children.filter(child => child.vattrs?.slot == "nav-end"),
+				].map(child => child.node),
+				child => {
+					if (child.vattrs?.label && child.vattrs?.path)
+						child = {
+							...emptyChild,
+							vtag: "a",
+							vattrs: { href: child.vattrs?.path, responsive: child.vattrs?.responsive },
+							vchildren: [
+								child.vattrs?.icon
+									? childToNode({
+											vtag: "smoothly-icon",
+											vattrs: {
+												toolTip: child.vattrs?.label,
+												name: child.vattrs?.icon,
+												size: "medium",
+											},
+									  })
+									: childToNode({ vtext: child.vattrs?.label }),
+							],
+						}
+					const url = resolve(child.vattrs?.href)
+					return child.vtag != "a"
+						? child
+						: url
+						? {
+								...child,
+								vattrs: {
+									...child.vattrs,
+									class: [child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined,
+									href: url,
+								},
+						  }
+						: { ...child, vattrs: { ...child.vattrs, target: "new" } }
+				}
+			)
+			.map(node => {
+				const child = nodeToChild(node)
+				return child.vtag == "a" && !child.vattrs?.target ? (
+					<a {...child.vattrs} {...href(child.vattrs?.href)}>
+						{child.vchildren}
+					</a>
+				) : (
+					node
+				)
+			})
+			.map(child => {
+				console.log(child.$attrs$)
+				return <li data-responsive={child.$attrs$?.responsive ?? child.$attrs$?.["data-responsive"]}>{child}</li>
+			})
+	}
+
 	return (
 		<smoothly-app>
 			<header>
@@ -28,62 +86,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				</h1>
 				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 				<nav>
-					<ul>
-						{utils
-							.map(
-								[
-									...children.filter(child => child.vattrs?.slot == "nav-start"),
-									...children.filter(child => child.vattrs?.label && child.vattrs?.path),
-									...children.filter(child => child.vattrs?.slot == "nav-end"),
-								].map(child => child.node),
-								child => {
-									if (child.vattrs?.label && child.vattrs?.path)
-										child = {
-											...emptyChild,
-											vtag: "a",
-											vattrs: { href: child.vattrs?.path },
-											vchildren: [
-												child.vattrs?.icon
-													? childToNode({
-															vtag: "smoothly-icon",
-															vattrs: {
-																toolTip: child.vattrs?.label,
-																name: child.vattrs?.icon,
-																size: "medium",
-															},
-													  })
-													: childToNode({ vtext: child.vattrs?.label }),
-											],
-										}
-									const url = resolve(child.vattrs?.href)
-									return child.vtag != "a"
-										? child
-										: url
-										? {
-												...child,
-												vattrs: {
-													...child.vattrs,
-													class: [child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined,
-													href: url,
-												},
-										  }
-										: { ...child, vattrs: { ...child.vattrs, target: "new" } }
-								}
-							)
-							.map(node => {
-								const child = nodeToChild(node)
-								return child.vtag == "a" && !child.vattrs?.target ? (
-									<a {...child.vattrs} {...href(child.vattrs?.href)}>
-										{child.vchildren}
-									</a>
-								) : (
-									node
-								)
-							})
-							.map(child => (
-								<li>{child}</li>
-							))}
-					</ul>
+					<ul>{navigationLinks()}</ul>
 				</nav>
 			</header>
 			<content>
