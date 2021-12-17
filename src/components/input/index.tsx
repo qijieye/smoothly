@@ -48,7 +48,11 @@ export class SmoothlyInput {
 			this.state = {
 				...this.state,
 				value: this.formatter.format(
-					StateEditor.copy(this.formatter.unformat(StateEditor.copy({ value, selection: this.state.selection })))
+					StateEditor.copy(
+						this.formatter.unformat(
+							StateEditor.copy({ value: this.formatter.toString(value), selection: this.state.selection })
+						)
+					)
 				).value,
 			}
 		}
