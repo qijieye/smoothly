@@ -1,5 +1,5 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
-import { Currency } from "isoly"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import { Currency, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
 @Component({
 	tag: "smoothly-input",
@@ -7,6 +7,7 @@ import { Action, Converter, Direction, Formatter, get, Settings, State, StateEdi
 	scoped: true,
 })
 export class SmoothlyInput {
+	@Element() element: HTMLSmoothlyInputElement
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -29,11 +30,14 @@ export class SmoothlyInput {
 			case "price":
 				result = get("price", this.currency)
 				break
+			case "date":
+				result = get("date", getLanguage(this.element))
+				break
 			default:
 				result = get(this.type as Type)
 				break
 		}
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		// eslint-disagetLanguageble-next-line @typescript-eslint/no-non-null-assertion
 		return result || get("text")!
 	}
 	@Event() smoothlyChanged: EventEmitter<{ name: string; value: any }>
@@ -218,4 +222,9 @@ export class SmoothlyInput {
 			</Host>
 		)
 	}
+}
+
+function getLanguage(element: HTMLElement | undefined): Locale {
+	const result = element ? element.lang : navigator.language
+	return Locale.is(result) ? result : getLanguage(element?.parentElement ?? undefined)
 }
