@@ -38,7 +38,7 @@ export class SmoothlyInput {
 				result = get(this.type as Type)
 				break
 		}
-		// eslint-disagetLanguageble-next-line @typescript-eslint/no-non-null-assertion
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return result || get("text")!
 	}
 	private newState(state: State) {
